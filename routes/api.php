@@ -25,14 +25,15 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('weather', [WeatherController::class, 'getWeather']);
 
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('user', function(Request $request) {
-        return $request->user();
-    });
-
+    // Route::get('user', function(Request $request) {
+    //     return $request->user();
+    // });
+    //Authenticacion
+    Route::post('register', [AuthController::class, 'register']);
     Route::get('check-token', [AuthController::class, 'checkToken']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('register', [AuthController::class, 'register']);
 
+    //Tareas
     Route::post('tasks', [TaskController::class, 'create']);
     Route::get('tasks', [TaskController::class, 'index']);
     Route::get('tasks/{id}', [TaskController::class, 'show']);
