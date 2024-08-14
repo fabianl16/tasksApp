@@ -37,14 +37,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Validar las credenciales del request
         $credentials = $request->only('email', 'password');
-        $user = JWTAuth::parseToken()->authenticate();
 
+        // Intentar obtener un token con las credenciales proporcionadas
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json(compact('user','token'));
+        // Obtener el usuario autenticado
+        $user = JWTAuth::user();
+
+        // Retornar el usuario y el token
+        return response()->json(compact('user', 'token'));
     }
 
     public function logout()
@@ -54,7 +59,8 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function checkToken(){
+    public function checkToken()
+    {
         $user = JWTAuth::parseToken()->authenticate();
         $newToken = JWTAuth::refresh();
 
