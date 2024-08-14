@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TaskController extends Controller
 {
@@ -46,10 +47,13 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        $user = JWTAuth::parseToken()->authenticate();
-        $task = Task::where('id', $id)->where('user_id', $user->id)->firstOrFail();
-
-        return response()->json($task);
+        try {
+            $user = JWTAuth::parseToken()->authenticate();    
+            $task = Task::where('id', $id)->where('user_id', $user->id)->firstOrFail();
+            return response()->json($task);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
     }
 
     /**
