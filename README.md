@@ -1,66 +1,281 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Parte 1 Cuestionario de conocimientos
 
-## About Laravel
+1. ¿Qué es Eloquent en Laravel?
+``` 
+Un ORM para facilitar la interacción con bases de datos.
+```
+2. ¿Cuál es el propósito de las migraciones en Laravel?
+``` 
+Gestionar la estructura de la base de datos.
+```
+3. ¿Qué comando de Artisan se utiliza para crear un controlador en Laravel?
+``` 
+php artisan make:controller
+```
+4. ¿Qué método de Eloquent se usa para obtener el primer resultado de una consulta?
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+``` 
+first();
+```
+5. ¿Cuál es el propósito de un Seeder en Laravel?
+``` 
+Llenar la base de datos con datos de prueba.
+```
+6. ¿Cómo se relacionan las tablas en una relación “muchos a muchos” en Laravel?
+``` 
+Mediante una tabla intermedia.
+```
+7. ¿Qué significa “PSR-4” en el contexto de PHP?
+``` 
+Una especificación de autoloading de clases.
+```
+8. ¿Cuál es la forma correcta de establecer una relación “uno a uno” en Eloquent?
+``` 
+$this->hasOne(RelatedModel::class)
+```
+9. ¿Cuál es la manera más segura de evitar inyecciones SQL en Laravel?
+``` 
+Validar todas las entradas del usuario.
+```
+10. ¿Qué función se utiliza para manejar errores y excepciones en Laravel?
+``` 
+try...catch
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Parte 2 Problema de resolución diaria
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Instrucciones: Describe detalladamente cómo resolverías el siguiente problema común que podría
+encontrarse en el desarrollo.
+Problema: Recientemente, un cliente ha informado que el sistema de autenticación de su aplicación web
+ha dejado de funcionar después de una actualización. Los usuarios no pueden iniciar sesión y reciben un
+mensaje de error genérico. Describe el proceso que seguirías para diagnosticar y resolver este problema.
+Incluye los pasos específicos y las herramientas que utilizarías.
 
-## Learning Laravel
+## 🟢 Respuesta
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Revision de logs 
+``` 
+Accederia a los logs de laravel en carpeta storage y revisaria si hay algun tpo de mensaje que se identifique con algun metodo de inicio de sesion o con el mensaje de error que esta enviando el navegador
+```
+2. Verificacion de clases, metódos y archivos de autenticacion
+``` 
+Accederia a los archivos de autenticación como config/auth.php o tambien revisaria si estan correctamente cargados las varibles de entorno en el archivo.env
+```
+3. Comprobación de la Base de Datos
+``` 
+Realizaria consultar puras a la BD para revisar si no hay algun problema con las tablas
+```
+4. Rutas de autenticacion
+``` 
+Revisaria si las rutas de autenticacion tienen los privilegios correctos o si estan debidamente definidas en el archivo de rutas. ademas de revisar el middleware de laravel en busca de omisiones o funciones alteradas 
+```
+4. Codigo autenticación 
+``` 
+Por ultimo validaria cualquier cambio o todo el codigo de la autenticacion, incluyendo controladores, modelos y servicios. reiniciando la cache del proyecto, vistas y rutas
+``` 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Parte 3 prueba tecnica configurar entorno de desarrollo
 
-## Laravel Sponsors
+1. Clonar proyecto 
+``` 
+git clone 'repositorio remoto'
+```
+2. Ejecutar composer para instalar para instalar librerias y dependencias 
+``` 
+composer install 
+```
+3. Clonar el archivo ``` .env.example ``` y renombrarlo a ``` .env ```
+4. Generar php key
+``` 
+php artisan key:generate
+```
+5. Generar llave JWT
+``` 
+php artisan jwt:secret
+```
+6. Cambiar las variables de entorno para crear un super usuario y la api key para la obtención del clima:
+```
+SUPER_ADMIN_EMAIL=
+SUPER_ADMIN_PASSWORD=
+WEATHER_API_KEY=
+```
+7. Cambiar las variables de la BD
+8. Levantar la base de datos, migrar y ejecutar las seed
+```
+php artisan migrate:fresh --seed
+```
+9. Levantar: 
+``` 
+php artisan serve 
+``` 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Endpoints y pruebas
 
-### Premium Partners
+1. Registrar usuario POST
+``` 
+http://127.0.0.1:8000/api/register
+``` 
+``` Este endpoint registra un usuario en la BD, es necesario estar autenticado para hacerlo ademas de requerir como obligatorios los siguientes parametros: name, email, password, password_confirmation  ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Response
 
-## Contributing
+  ```json
+{
+    "user": {
+        "name": "Fabian Loaeza",
+        "email": "floaeza@bbinco.com",
+        "id": 6
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdGFza3NhcHAudGVzdC9hcGkvcmVnaXN0ZXIiLCJpYXQiOjE3MjM2NDk1NjgsImV4cCI6MTcyMzY1MzE2OCwibmJmIjoxNzIzNjQ5NTY4LCJqdGkiOiJuNmliREZkRXRXbnQ4QmJmIiwic3ViIjoiNiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.HdH5FSd_YRMizAMthznBdeVnHXs9GBdXYtL2NMUszpw"
+}
+```
+ 
+2. Login POST
+``` 
+http://127.0.0.1:8000/api/login
+``` 
+``` Este endpoint inicia sesión de un usuario ya registrado en la BD, requiere los siguientes parametros obligatorios: email, password ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Response
+  ```json
+{
+    "user": {
+        "id": 5,
+        "name": "Super Admin",
+        "email": "floaeza@gmail.com",
+        "email_verified_at": null
+    },
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vdGFza3NhcHAudGVzdC9hcGkvbG9naW4iLCJpYXQiOjE3MjM2NDgxMTYsImV4cCI6MTcyMzY1MTcxNiwibmJmIjoxNzIzNjQ4MTE2LCJqdGkiOiJ4R21jTlp3UTgzOGNiQTNyIiwic3ViIjoiNSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.G8rJYmTGDYSD3grWjF7x2Rzc9RlwQztcbfaG5KHCeI4"
+}
+```
 
-## Code of Conduct
+3. Tareas por usuario autenticado GET
+``` 
+http://127.0.0.1:8000/api/tasks
+``` 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+``` Este endpoint regresa todas las tareas del usuario autenticado es necesario estar autenticada (mandar el bearer token)```
 
-## Security Vulnerabilities
+## Response
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```json
+    {
+        "id": 1,
+        "user_id": 5,
+        "title": "example",
+        "description": "example",
+        "status": "pending",
+        "due_date": null,
+        "created_at": "2024-08-14T08:52:04.000000Z",
+        "updated_at": "2024-08-14T08:52:04.000000Z"
+    }
+```
 
-## License
+4. Creacion de una nueva tarea POST
+``` 
+http://127.0.0.1:8000/api/tasks
+``` 
+``` Este endpoint crea una tarea y regresa la misma en forma JSON, parametros obligatorios : title, description, status```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Response
+
+```json
+{
+    "title": "example2",
+    "description": "example2",
+    "status": "pending",
+    "user_id": 5,
+    "updated_at": "2024-08-14T15:10:05.000000Z",
+    "created_at": "2024-08-14T15:10:05.000000Z",
+    "id": 2
+}
+```
+
+5. Actualización de una tarea existente PUT
+``` 
+http://127.0.0.1:8000/api/tasks/{id}
+``` 
+``` Este endpoint actualiza una tarea por id  segun la propiedad mandada en la solicitud ```
+
+## Response
+
+```json
+{
+    "id": 2,
+    "user_id": 5,
+    "title": "batman",
+    "description": "example2",
+    "status": "pending",
+    "due_date": null,
+    "created_at": "2024-08-14T15:10:05.000000Z",
+    "updated_at": "2024-08-14T15:25:15.000000Z"
+}
+```
+6. Eliminar una tarea existente DELETE
+``` 
+http://127.0.0.1:8000/api/tasks/{id}
+``` 
+``` Este endpoint elimina una tarea segun el id en la url ```
+
+## Response
+
+```
+retorna 204 
+```
+4. Consulta de apiWeather
+``` 
+http://127.0.0.1:8000/api/weather
+``` 
+``` Este consulta la api de OpenWeather y da como respuesta el pronostico del clima segun la latitud y longitud enviadas, lat y lon son obligatorias```
+
+## Response
+
+```json
+{
+    "coord": {
+        "lon": 44.34,
+        "lat": 10.99
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 303.41,
+        "feels_like": 308.32,
+        "temp_min": 303.41,
+        "temp_max": 303.41,
+        "pressure": 1004,
+        "humidity": 68,
+        "sea_level": 1004,
+        "grnd_level": 1004
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 8.92,
+        "deg": 289,
+        "gust": 13.76
+    },
+    "clouds": {
+        "all": 5
+    },
+    "dt": 1723651314,
+    "sys": {
+        "country": "SO",
+        "sunrise": 1723603955,
+        "sunset": 1723648933
+    },
+    "timezone": 10800,
+    "id": 54746,
+    "name": "Lughaye",
+    "cod": 200
+}
+```
