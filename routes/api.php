@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\WeatherController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +22,7 @@ use App\Http\Controllers\TaskController;
 
 Route::post('login', [AuthController::class, 'login']);
 
+Route::post('weather', [WeatherController::class, 'getWeather']);
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('user', function(Request $request) {
@@ -36,8 +38,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('tasks/{id}', [TaskController::class, 'show']);
     Route::put('tasks/{id}', [TaskController::class, 'update']);
     Route::delete('tasks/{id}', [TaskController::class, 'destroy']);
-
-
-
 });
 
