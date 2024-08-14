@@ -114,6 +114,22 @@ php artisan serve
 
 ## Endpoints y pruebas
 
+# NOTAS
+Añadir a los siguientes encabezados de las peticiones 
+
+``` 
+Accept application/json
+``` 
+
+Los siguientes endpoint requieren autenticacion, es decir necesitan tener un bearer token enla solicitud, al ejecutar las migraciones y las seed se genera un super usuario segun los accesos que se colocaron en el archivo .env con esos puedes iniciar sesion para crear usuarios o para acceder a los demas endpoints 
+``` 
+POST http://127.0.0.1:8000/api/register
+PUT  http://127.0.0.1:8000/api/tasks/{id}
+GET  http://127.0.0.1:8000/api/tasks
+POST  http://127.0.0.1:8000/api/tasks
+DELETE http://127.0.0.1:8000/api/tasks/{id}
+``` 
+
 1. Registrar usuario POST
 ``` 
 http://127.0.0.1:8000/api/register
@@ -279,3 +295,19 @@ http://127.0.0.1:8000/api/weather
     "cod": 200
 }
 ```
+
+# NOTAS
+Añadir a los encabezados de las peticiones 
+
+``` 
+Accept application/json
+``` 
+
+Los siguientes endpoint requieren autenticacion, es decir necesitan tener un bearer token enla solicitud
+``` 
+POST http://127.0.0.1:8000/api/register
+PUT  http://127.0.0.1:8000/api/tasks/{id}
+GET  http://127.0.0.1:8000/api/tasks
+POST  http://127.0.0.1:8000/api/tasks
+DELETE http://127.0.0.1:8000/api/tasks/{id}
+``` 
